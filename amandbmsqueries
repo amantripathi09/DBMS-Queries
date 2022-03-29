@@ -1,0 +1,127 @@
+                                          Aman Tripathi
+                                        Roll no.2002008
+                                      Computer Science Department
+                                      Dbms Practical file
+                                      
+  mysql> create database emp_dept;
+  
+mysql> create table emp_dept.DEPARTMENT(
+    -> Dno integer not null primary key,
+    -> Dname varchar(50),
+    -> Location varchar(50) deafault 'New Delhi'
+    -> );
+    
+ mysql> create table emp_dept.EMPLOYEE(
+    -> Eno CHAR(3) NOT null primary key,
+    -> ENAME  varchar(50) not null,
+    -> Job_Type varchar(50) not null,
+    -> SupervisionENO char(3),
+    -> Hire_date DATE NOT NULL,
+    -> Dno integer,
+    -> Commision decimal(10,2),
+    -> Salary DECIMAL 
+    -> (10,2) NOT NULL,
+    -> foreign key(Dno) references emp_dept.DEPARTMENT(Dno),
+    -> foreign key(SupervisionENO)references emp_dept.EMPLOYEE(Eno)
+    -> );
+    
+    -Query to display employee name,job hire date, employee number for each employee number appearing first
+    select Eno ,Ename,Job_type,Hire_date from emp_dept.employee;
+    -Query to display unique jobs from the employee table.
+    select distinct Job_type from emp_dept.EMPLOYEE;
+    -Query to display the enmployee name concatenated by a  job separated by a comma
+    select concat(Ename,',',Job_type) as data from emp_dept.employee;
+    -Query to display all the data from the Employee Table ,Separate each column  by a comma  the said column  as the 
+    _output
+    select concat(Eno '',ENAME '',Job_type'',supervisionENO'',Hire_date'',commision'',salary)as 'THE_OUPUT' from emp_dept.employee;
+    -Query to display the employee Name and Salary of all the employees earning more than $2850
+    select Ename,
+    Salary Ename ,
+    salary
+    from emp_dept.employee
+    where salary>2850;
+    -6.Query to display Employee Name and department number for the Employee no=79.
+    select Ename,
+    Dno
+    from emp_dept.employee
+    where Eno=79;
+    -7 Query to display Employee Name and Salary for all employees whose salary is not in the range of $1500 and  $2850
+    SELECT Ename,
+    Salary
+    From emp_dept.EMPLOYEE
+    where salary not in(1500,2850);
+    -8Query to display Employee Name and department NO.  OF all the employeess in Dept 10 and Dept 30 int he alphabetical order by name.
+    select Ename,
+    Dno
+    FROM dept.employee
+    WHERE Dno=10
+    OR no=30
+    ORDER BY Ename;
+    -9Query to display Name and Hire Date of every Employee who was hired in 1981.
+    SELECT Ename,
+    Hire_date
+    FROM emp_dept.employee
+    WHERE Hire_date like '1981%';
+    -10Querylay Name and Job of all employees whohave not asssigned a supervisor.
+    SELECT Ename,
+    Job_type 
+    FROM emp_dept.employee
+    WHERE SupervisionEno='';
+    -11. Query to display the name ,salary and comission for all the employees who earn commmisssion.
+    SELECT Ename'Name',
+    Salary,
+    Commission
+    FROM emp_dept.emplopyee
+    WHERE employee.Commission IS NOT NULL;
+    -12Query sort he data in descending order of salary and.
+    SELECT*
+    FROM emp_dept.employee
+    ORDER BY Salary DESC,
+    Commision DESC;
+    -13.Query to display name of all the employees where the third letter of their name is 
+    SELECT Ename 
+    FROM emp_dept.employee
+    WHERE Ename LIKE '_A%';
+    -14.Query to display Name of all employees  either have two 'R'S Or have two 'A's in their name and either in dept No=30 or their Manager's Employee No=7788
+    select Ename
+    from emp_dept.EMPLOYEE
+    where(
+    Ename like '%R%R%'
+    or Ename like '%A%A%'
+    )
+    and(
+    Dno=30
+    or SupervisionENO=7788
+    );
+    -15.Query to display Name,Salary and Comission for all employees whose Commision amount is greater than their salary increased by 5%.
+    select Ename,
+    Salary,
+    Commision
+    from emp_dept.employee
+    where Commision>(Salary +0.05*Salary);
+    -16 Query to display the current date along with the day name.
+    select current_date() as 'Current Date',
+    dayname(current_date()) as'Day Name';
+    -17Query to display Name ,Hire date and Salary Review Date which is the 1st Monday after six months  of employment.
+    select y.Emp_name  AS 'Name',
+    y.Hiring_date,
+    CASE
+    WHEN DAYNAME(y.new_date)='tuesday' THEN ADDDATE(y.new_date,INTERVAL6 DAY)
+    WHEN DAYNAME(y.new_date)='Wednesday' THEN ADDDATE(y.new_date,INTERVAL5 DAY)
+    WHEN DAYNAME(y.new_date)='Thursday' THEN ADDDATE(y.new_date,INTERVAL 4 DAY)
+    WHEN DAYNAME(y.new_date)='Friday' THEN ADDDATE(y.new_date,INTERVAL 3 DAY)
+    WHEN DAYNAME(y.new_date)='Saturday' THEN ADDDATE(y.new_date,INTERVAL 2 DAY)
+    WHEN DAYNAME(y.new_date)='Sunday' THEN ADDDATE(y.new_date,INTERVAL 1 DAY)
+    ELSE y.newdate
+    END AS Salary_review_date
+    FROM(
+    SELECT x.Ename Emp_Name,
+    x.Hire_date Hiring_date,
+    ADDDATE(hire_date,INTERVAL 6 MONTH)new_date
+    FROM(
+    SELECT x.Ename Emp_Name,
+    x.Hire_date Hiring_date,
+    ADDDATE(hire_date,INTERVAL 6MONTH)new_date
+    FROM(
+    SELECT x.
+    
